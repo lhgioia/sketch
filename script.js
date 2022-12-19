@@ -1,19 +1,28 @@
-// create 16x16 div grid using flexbox attributes
+// create sketch grid using css grid
 
-const gridSideLength = 16;
+const gridSideLength = 160;
 
-const gridPixels = 800;
+const gridDivNumber = gridSideLength * gridSideLength;
+
+const gridPixels = 750;
 
 const wrapperDiv = document.querySelector('#wrapperDiv');
 
+wrapperDiv.style.height = `${gridPixels}px`;
+wrapperDiv.style.width = `${gridPixels}px`;
+
 wrapperDiv.style.display = 'grid';
 
-// want to get more familiar with css grid https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
-
+wrapperDiv.style.gridTemplateColumns = `repeat(${gridSideLength}, 1fr)`;
 
 const pixelDiv = document.createElement('div');
-pixelDiv.classList.add('new');
 
-wrapperDiv.appendChild(pixelDiv);
+for (let i = 0; i < gridDivNumber; i++) {
+    const pixelDiv = document.createElement('div');
+    pixelDiv.addEventListener('mouseover', changeBackground);
+    wrapperDiv.appendChild(pixelDiv);
+};
 
-pixelDiv.setAttribute('style', 'color: blue; background: white;');
+function changeBackground(e) {
+    e.target.style.background = 'black';
+}
