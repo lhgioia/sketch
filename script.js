@@ -15,8 +15,6 @@ wrapperDiv.style.display = 'grid';
 
 wrapperDiv.style.gridTemplateColumns = `repeat(${gridSideLength}, 1fr)`;
 
-const pixelDiv = document.createElement('div');
-
 for (let i = 0; i < gridDivNumber; i++) {
     const pixelDiv = document.createElement('div');
     pixelDiv.addEventListener('mouseover', changeBackground);
