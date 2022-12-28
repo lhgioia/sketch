@@ -39,18 +39,23 @@ function gridReset() {
 
 
     createGrid();
-}
+};
 
 function createGrid() {
     for (let i = 0; i < gridDivNumber; i++) {
         const pixelDiv = document.createElement('div');
-        pixelDiv.addEventListener('mouseover', changeBackground);
+        pixelDiv.addEventListener('mouseover', changeBackgroundRainbow);
         wrapperDiv.appendChild(pixelDiv);
     };
 };
 
-function changeBackground(e) {
-    e.target.style.background = 'black';
+function changeBackgroundRainbow(e) {
+    if (e.target.style.background != '') {
+        e.target.style.background = 'black';
+    } else {
+    randomColor = "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0");
+    e.target.style.background = randomColor;
+    };
 };
 
 gridReset();
