@@ -1,36 +1,56 @@
 // create sketch grid using css grid
 
-const gridSideLength = 100;
+let gridSideLength = 20;
 
-const gridDivNumber = gridSideLength * gridSideLength;
+let gridDivNumber = gridSideLength * gridSideLength;
 
 const gridPixels = 750;
 
 const body = document.querySelector('body');
+
+const wrapperDiv = document.createElement('div');
 
 const buttonDiv = document.createElement('div');
 body.appendChild(buttonDiv);
 
 const button = document.createElement('button');
 buttonDiv.appendChild(button);
+button.style.width = '50px';
+button.style.height = '20px';
+button.textContent = 'reset';
 
-const wrapperDiv = document.createElement('div');
-body.appendChild(wrapperDiv);
-// const wrapperDiv = document.querySelector('#wrapperDiv');
+button.addEventListener('click', gridReset);
 
-wrapperDiv.style.height = `${gridPixels}px`;
-wrapperDiv.style.width = `${gridPixels}px`;
+function gridReset() {
+    gridSideLength = prompt('enter the grid side length pixel number', 100);
+    gridDivNumber = gridSideLength * gridSideLength;
 
-wrapperDiv.style.display = 'grid';
+    // wrapperDiv.innerHTML = '' does not work on internet explorer;
+    while(wrapperDiv.firstChild) {wrapperDiv.removeChild(wrapperDiv.firstChild)};
 
-wrapperDiv.style.gridTemplateColumns = `repeat(${gridSideLength}, 1fr)`;
+    body.appendChild(wrapperDiv);
 
-for (let i = 0; i < gridDivNumber; i++) {
-    const pixelDiv = document.createElement('div');
-    pixelDiv.addEventListener('mouseover', changeBackground);
-    wrapperDiv.appendChild(pixelDiv);
+    wrapperDiv.style.height = `${gridPixels}px`;
+    wrapperDiv.style.width = `${gridPixels}px`;
+
+    wrapperDiv.style.display = 'grid';
+
+    wrapperDiv.style.gridTemplateColumns = `repeat(${gridSideLength}, 1fr)`;
+
+
+    createGrid();
+}
+
+function createGrid() {
+    for (let i = 0; i < gridDivNumber; i++) {
+        const pixelDiv = document.createElement('div');
+        pixelDiv.addEventListener('mouseover', changeBackground);
+        wrapperDiv.appendChild(pixelDiv);
+    };
 };
 
 function changeBackground(e) {
     e.target.style.background = 'black';
 };
+
+gridReset();
